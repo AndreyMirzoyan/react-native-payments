@@ -21,6 +21,7 @@ export default class PaymentResponse {
   _payerPhone: null | string;
   _payerEmail: null | string;
   _completeCalled: boolean;
+  _paymentCryptogram: string;
 
   constructor(paymentResponse: Object) {
     // Set properties as readOnly
@@ -32,10 +33,16 @@ export default class PaymentResponse {
     this._payerName = paymentResponse.payerName;
     this._payerPhone = paymentResponse.payerPhone;
     this._payerEmail = paymentResponse.payerEmail;
+    this._paymentCryptogram = paymentResponse.paymentCryptogram;
 
     // Internal Slots
     this._completeCalled = false;
   }
+
+
+    get paymentCryptogram(): string {
+        return this._paymentCryptogram;
+    }
 
   // https://www.w3.org/TR/payment-request/#requestid-attribute
   get requestId(): string {

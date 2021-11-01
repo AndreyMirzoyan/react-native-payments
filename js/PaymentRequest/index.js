@@ -367,7 +367,8 @@ export default class PaymentRequest {
     shippingAddress: Object,
     payerEmail: string,
     paymentToken?: string,
-    paymentMethod: Object
+    paymentMethod: Object,
+    paymentCryptogram: string,
   }) {
     // On Android, we don't have `onShippingAddressChange` events, so we
     // set the shipping address when the user accepts.
@@ -382,6 +383,7 @@ export default class PaymentRequest {
       requestId: this.id,
       methodName: IS_IOS ? 'apple-pay' : 'android-pay',
       shippingAddress: this._options.requestShipping ? this._shippingAddress : null,
+      paymentCryptogram: details.paymentCryptogram,
       details: this._getPlatformDetails(details),
       shippingOption: IS_IOS ? this._shippingOption : null,
       payerName: this._options.requestPayerName ? this._shippingAddress.recipient : null,

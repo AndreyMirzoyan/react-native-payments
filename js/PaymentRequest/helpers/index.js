@@ -310,6 +310,9 @@ export function getGatewayName(platformMethodData) {
 }
 
 export function validateGateway(selectedGateway = '', supportedGateways = []) {
+  // anagovitsyn
+  return
+  
   if (!supportedGateways.includes(selectedGateway)) {
     throw new ConstructorError(
       `"${selectedGateway}" is not a supported gateway. Visit https://goo.gl/fsxSFi for more info.`

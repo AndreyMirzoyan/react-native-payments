@@ -1,4 +1,5 @@
 #import "ReactNativePayments.h"
+#import "SDK-iOS/PKPaymentConverter.h"
 #import <React/RCTUtils.h>
 #import <React/RCTEventDispatcher.h>
 
@@ -485,6 +486,16 @@ RCT_EXPORT_METHOD(handleDetailsUpdate: (NSDictionary *)details
     if (payment.shippingContact) {
         paymentResponse[@"shippingContact"] = [self contactToString:payment.shippingContact];
     }
+    
+    
+      @try {
+         NSString* paymentCryptogram = [PKPaymentConverter convertToString: payment];
+         [paymentResponse setObject:paymentCryptogram forKey:@"paymentCryptogram"];
+      }
+      @catch (NSException * e) {
+         NSLog(@"Exception at [PKPaymentConverter convertToString: payment]: %@", e);
+      }
+
     
     [self.bridge.eventDispatcher sendDeviceEventWithName:@"NativePayments:onuseraccept"
                                                     body:paymentResponse
